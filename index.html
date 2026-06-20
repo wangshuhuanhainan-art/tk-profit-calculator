@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SHG TikTok Shop 菲律宾利润计算器</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>SHG TikTok Shop 菲律宾利润计算器</h1>
+    <p>本土仓结算单逻辑 + 跨境可配置费用框架，数据自动保存到浏览器 localStorage。</p>
+    <div class="tabs"><button id="localTab" class="active">菲律宾本土发货</button><button id="crossTab">跨境发货</button></div>
+  </header>
+
+  <main>
+    <section class="toolbar card">
+      <button id="calcBtn">开始计算</button>
+      <button id="clearBtn">清空当前数据</button>
+      <button id="defaultsBtn">恢复默认费率</button>
+      <button id="caseBtn">恢复结算单案例</button>
+      <button id="copyBtn">复制计算结果</button>
+      <button id="exportBtn">导出计算结果为文本</button>
+    </section>
+
+    <section id="localMode" class="mode active">
+      <section class="card"><h2>本土结算单校验案例</h2><div class="grid two"><label>选择案例<select id="localCase"><option value="none">不使用案例</option><option value="A">案例 A</option><option value="B">案例 B</option></select></label><div id="caseStatus" class="notice">请选择案例进行校验。</div></div></section>
+      <section class="card"><h2>【买家端】价格展示</h2><div id="localBuyer" class="grid"></div><div class="result-grid"><div>买家前台商品小计 <b id="localBuyerSubtotal">0.00</b></div><div>买家最终支付金额 <b id="localBuyerPay">0.00</b></div></div></section>
+      <section class="card"><h2>【卖家结算端】收入与平台费用</h2><div class="grid two"><label>商家折扣计算方式<select id="localDiscountMode"><option value="manual">手动输入商家总折扣（优先）</option><option value="auto">自动：活动折扣 + Seller coupon</option></select></label><label>商家总折扣 PHP<input id="localMerchantDiscount" type="number" step="0.01"></label></div><div id="localFees" class="fees"></div><div class="result-grid"><div>商家折扣后小计 <b id="localSettlementBase">0.00</b></div><div>平台费用总额 <b id="localPlatformFees">0.00</b></div><div>提现手续费 <b id="localWithdrawalFee">0.00</b></div><div>预计结算总金额 <b id="localSettlement">0.00</b></div></div></section>
+      <section class="card"><h2>本土履约成本</h2><div id="localCosts" class="grid"></div></section>
+      <section class="card"><h2>利润结果 / 保本价 / 建议售价</h2><div id="localTargets" class="grid three"></div><div id="localResults" class="result-grid big"></div></section>
+      <section class="card"><h2>情景模拟</h2><div id="localScenarios" class="scenarios"></div></section>
+    </section>
+
+    <section id="crossMode" class="mode">
+      <section class="card"><h2>【跨境】价格输入</h2><div id="crossBuyer" class="grid"></div><div class="grid two"><label>商家折扣计算方式<select id="crossDiscountMode"><option value="manual">手动输入商家总折扣</option><option value="auto">自动：活动折扣 + Seller coupon</option></select></label><label>商家总折扣 PHP<input id="crossMerchantDiscount" type="number" step="0.01"></label></div></section>
+      <section class="card"><h2>跨境平台费用（默认全部关闭，等待真实结算单校准）</h2><div id="crossFees" class="fees"></div></section>
+      <section class="card"><h2>跨境成本</h2><div id="crossCosts" class="grid"></div></section>
+      <section class="card"><h2>跨境利润结果 / 保本价 / 建议售价</h2><div id="crossTargets" class="grid three"></div><div id="crossResults" class="result-grid big"></div></section>
+      <section class="card"><h2>情景模拟</h2><div id="crossScenarios" class="scenarios"></div></section>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
