@@ -2,3 +2,5 @@
 @media(max-width:1100px){.hero-top{flex-direction:column}.mode-switches{justify-content:flex-start}.switch-group{min-width:0}.fee-row{grid-template-columns:repeat(3,minmax(160px,1fr))}}
 @media(max-width:800px){.fee-row{grid-template-columns:1fr 1fr}.toolbar,.tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.tabs button,.toolbar button{width:100%;padding-left:10px;padding-right:10px}.mode-switches,.switch-group{width:100%}}
 @media(max-width:480px){.toolbar,.tabs{grid-template-columns:1fr}.hero{padding:22px 4vw}.card{padding:14px}.grid,.grid.three{grid-template-columns:1fr}}
+.seller-sections{display:grid;grid-template-columns:1fr;gap:16px}.sub-card{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfdff}.sub-card h3{margin:0 0 8px}.ad-card{border-color:#99f6e4;background:#f0fdfa}.risk-card{border-color:#cbd5e1;background:#f8fafc}.seller-summary{border-top:1px dashed var(--line);padding-top:14px}
+@media(min-width:1180px){.seller-sections{grid-template-columns:1fr 1fr}.sub-card .grid.three{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}}
