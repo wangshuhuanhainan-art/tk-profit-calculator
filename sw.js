@@ -1,4 +1,4 @@
-const CACHE_VERSION = '2026-06-25-pwa-v1';
+const CACHE_VERSION = '2026-06-25-pwa-icons-v2';
 const CACHE_NAME = `tk-profit-calculator-${CACHE_VERSION}`;
 const APP_SHELL = [
   './',
@@ -6,7 +6,9 @@ const APP_SHELL = [
   './style.css',
   './script.js',
   './manifest.webmanifest',
-  './assets/app-icon.svg'
+  './assets/app-icon-180.png',
+  './assets/app-icon-192.png',
+  './assets/app-icon-512.png'
 ];
 
 self.addEventListener('install', event => {
