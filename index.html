@@ -3,7 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>超级 TikTok Shop 菲律宾利润计算器</title>
+  <title>牛逼clas计算器</title>
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="牛逼clas" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/app-icon.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/app-icon.svg" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -30,8 +37,22 @@
       <button id="defaultsBtn" type="button">恢复默认费率</button>
       <button id="copyBtn" type="button">复制计算结果</button>
       <button id="exportBtn" type="button">导出计算结果为文本</button>
+      <button id="installBtn" class="install-button" type="button">安装应用</button>
     </section>
+    <div class="pwa-note">
+      <span>可将本工具添加到手机主屏幕或安装到电脑桌面，方便随时使用。</span>
+      <button id="installHelpBtn" type="button">查看安装方法</button>
+    </div>
   </header>
+
+  <div id="installHelp" class="pwa-panel" hidden>
+    <button id="installHelpClose" type="button" aria-label="关闭安装说明">×</button>
+    <strong>安装方法</strong>
+    <p>安卓 Chrome：点击浏览器菜单 → 添加到主屏幕</p>
+    <p>iPhone Safari：点击分享按钮 → 添加到主屏幕</p>
+    <p>Windows Chrome / Edge：点击地址栏安装图标，或浏览器菜单 → 安装应用</p>
+  </div>
+  <button id="updateToast" class="update-toast" type="button" hidden>发现新版本，点击刷新更新</button>
 
   <main>
     <section id="localMode" class="mode active">

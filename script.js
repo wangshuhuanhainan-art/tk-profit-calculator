@@ -40,3 +40,23 @@ function setCalculationMode(next){calculationMode=normalizeCalculationMode(next)
 function applyModes(){let isLocal=shippingMode==='local', isReplay=calculationMode==='replay';$('localTab').classList.toggle('active',isLocal);$('crossTab').classList.toggle('active',!isLocal);$('estimateTab').classList.toggle('active',!isReplay);$('replayTab').classList.toggle('active',isReplay);$('localMode').classList.toggle('active',isLocal);$('crossMode').classList.toggle('active',!isLocal);document.body.dataset.calculationMode=calculationMode;['local','cross'].forEach(p=>{let replayOn=$(`${p}_replay_on`);if(replayOn) replayOn.checked=isReplay})}
 function bind(){document.addEventListener('input',()=>calc());document.addEventListener('change',e=>{if(e.target?.id?.endsWith('_replay_on')) calculationMode=e.target.checked?'replay':'estimate';applyModes();calc()});$('localTab').onclick=()=>setShippingMode('local');$('crossTab').onclick=()=>setShippingMode('cross');$('estimateTab').onclick=()=>setCalculationMode('estimate');$('replayTab').onclick=()=>setCalculationMode('replay');$('calcBtn').onclick=()=>calc();$('clearBtn').onclick=()=>{document.querySelectorAll('.mode.active input').forEach(i=>{if(i.type==='checkbox')i.checked=false;else i.value=0});calculationMode='estimate';applyModes();calc()};$('defaultsBtn').onclick=resetDefaults;$('copyBtn').onclick=()=>navigator.clipboard?.writeText(lastText);$('exportBtn').onclick=()=>{let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lastText],{type:'text/plain'}));a.download='tiktok-profit-result.txt';a.click()}}
 if(typeof document!=='undefined') init();
+
+let deferredInstallPrompt=null, installHelpDismissed=false;
+function showInstallHelp(){if(installHelpDismissed)return; const panel=$('installHelp'); if(panel) panel.hidden=false}
+function setupPwa(){
+ const installBtn=$('installBtn'), helpBtn=$('installHelpBtn'), panel=$('installHelp'), closeBtn=$('installHelpClose'), toast=$('updateToast');
+ window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;if(installBtn)installBtn.disabled=false});
+ installBtn?.addEventListener('click',async()=>{if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null}else showInstallHelp()});
+ helpBtn?.addEventListener('click',()=>{installHelpDismissed=false;if(panel)panel.hidden=false});
+ closeBtn?.addEventListener('click',()=>{installHelpDismissed=true;if(panel)panel.hidden=true});
+ if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').then(reg=>{
+   if(reg.waiting&&toast)toast.hidden=false;
+   reg.addEventListener('updatefound',()=>{const worker=reg.installing;worker?.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller&&toast)toast.hidden=false})});
+  }).catch(err=>console.warn('Service Worker 注册失败',err));
+  let refreshing=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(refreshing)return;refreshing=true;window.location.reload()});
+ }
+ toast?.addEventListener('click',()=>{navigator.serviceWorker.getRegistration().then(reg=>{if(reg?.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});else window.location.reload()})});
+}
+if(typeof document!=='undefined') setupPwa();

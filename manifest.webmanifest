@@ -1,0 +1,14 @@
+{
+  "name": "牛逼clas计算器",
+  "short_name": "牛逼clas",
+  "description": "用于 TikTok Shop 菲律宾本土店与跨境店的利润测算、平台费用核算、广告成本、风险预留和真实订单复盘。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#0f766e",
+  "background_color": "#f5f7fb",
+  "icons": [
+    { "src": "assets/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
